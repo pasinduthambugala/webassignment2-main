@@ -1,0 +1,142 @@
+{
+  "hash": "10248fe3",
+  "configHash": "a1b96433",
+  "lockfileHash": "3c37b3f7",
+  "browserHash": "2a08e09b",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "9646d5ec",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "2bce20f1",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "23aefc28",
+      "needsInterop": false
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/esm/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "4fb0527c",
+      "needsInterop": false
+    },
+    "@mui/icons-material/Person": {
+      "src": "../../node_modules/@mui/icons-material/esm/Person.js",
+      "file": "@mui_icons-material_Person.js",
+      "fileHash": "4d718d4d",
+      "needsInterop": false
+    },
+    "@mui/icons-material/Lock": {
+      "src": "../../node_modules/@mui/icons-material/esm/Lock.js",
+      "file": "@mui_icons-material_Lock.js",
+      "fileHash": "f0c50d35",
+      "needsInterop": false
+    },
+    "@mui/icons-material/Email": {
+      "src": "../../node_modules/@mui/icons-material/esm/Email.js",
+      "file": "@mui_icons-material_Email.js",
+      "fileHash": "1ae396ed",
+      "needsInterop": false
+    },
+    "@mui/system": {
+      "src": "../../node_modules/@mui/system/esm/index.js",
+      "file": "@mui_system.js",
+      "fileHash": "25e1e3e5",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "51e288a3",
+      "needsInterop": false
+    },
+    "@mui/icons-material": {
+      "src": "../../node_modules/@mui/icons-material/esm/index.js",
+      "file": "@mui_icons-material.js",
+      "fileHash": "82ea4339",
+      "needsInterop": false
+    },
+    "@mui/x-date-pickers/AdapterDayjs": {
+      "src": "../../node_modules/@mui/x-date-pickers/esm/AdapterDayjs/index.js",
+      "file": "@mui_x-date-pickers_AdapterDayjs.js",
+      "fileHash": "117b9f75",
+      "needsInterop": false
+    },
+    "@mui/x-date-pickers/LocalizationProvider": {
+      "src": "../../node_modules/@mui/x-date-pickers/esm/LocalizationProvider/index.js",
+      "file": "@mui_x-date-pickers_LocalizationProvider.js",
+      "fileHash": "5c9ea0d7",
+      "needsInterop": false
+    },
+    "@mui/x-date-pickers/DatePicker": {
+      "src": "../../node_modules/@mui/x-date-pickers/esm/DatePicker/index.js",
+      "file": "@mui_x-date-pickers_DatePicker.js",
+      "fileHash": "d78cb213",
+      "needsInterop": false
+    },
+    "@mui/icons-material/ShoppingCart": {
+      "src": "../../node_modules/@mui/icons-material/esm/ShoppingCart.js",
+      "file": "@mui_icons-material_ShoppingCart.js",
+      "fileHash": "9e0b7642",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-AVBJDU3V": {
+      "file": "chunk-AVBJDU3V.js"
+    },
+    "chunk-ZHDY4H3T": {
+      "file": "chunk-ZHDY4H3T.js"
+    },
+    "chunk-TKY7BQFN": {
+      "file": "chunk-TKY7BQFN.js"
+    },
+    "chunk-P22AHKY7": {
+      "file": "chunk-P22AHKY7.js"
+    },
+    "chunk-KAXTRJKL": {
+      "file": "chunk-KAXTRJKL.js"
+    },
+    "chunk-62HKZ5ZB": {
+      "file": "chunk-62HKZ5ZB.js"
+    },
+    "chunk-4TODJBIZ": {
+      "file": "chunk-4TODJBIZ.js"
+    },
+    "chunk-O7OWDQQF": {
+      "file": "chunk-O7OWDQQF.js"
+    },
+    "chunk-6AOQKXY7": {
+      "file": "chunk-6AOQKXY7.js"
+    },
+    "chunk-C6WWHQR7": {
+      "file": "chunk-C6WWHQR7.js"
+    },
+    "chunk-FSNQZ5OP": {
+      "file": "chunk-FSNQZ5OP.js"
+    },
+    "chunk-PAJ3BOTJ": {
+      "file": "chunk-PAJ3BOTJ.js"
+    },
+    "chunk-CJJFKLR2": {
+      "file": "chunk-CJJFKLR2.js"
+    },
+    "chunk-HQ6ZTAWL": {
+      "file": "chunk-HQ6ZTAWL.js"
+    },
+    "chunk-TWJRYSII": {
+      "file": "chunk-TWJRYSII.js"
+    },
+    "chunk-DC5AMYBS": {
+      "file": "chunk-DC5AMYBS.js"
+    }
+  }
+}
