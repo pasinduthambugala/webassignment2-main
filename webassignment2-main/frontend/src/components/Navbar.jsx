@@ -1,6 +1,14 @@
 import React, { useContext } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Badge, Box } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Badge,
+  Box
+} from '@mui/material';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -8,64 +16,191 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
-    const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    };
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
-    return (
-        <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #1A237E 30%, #283593 90%)', boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)' }}>
-            <Toolbar>
-                <IconButton edge="start" color="inherit" aria-label="menu" component={Link} to="/">
-                    <MenuBookIcon sx={{ fontSize: 30 }} />
-                </IconButton>
-                <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold', letterSpacing: 1, ml: 1 }}>
-                    Lavender Bookshop
-                </Typography>
+  // common nav button style
+  const navButtonStyle = (path) => ({
+    color: location.pathname === path ? '#1D4ED8' : '#1F2937', // dark color for buttons
+    fontWeight: 500,
+    textTransform: 'none',
+    position: 'relative',
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      bottom: 6,
+      left: '25%',
+      width: location.pathname === path ? '50%' : '0%',
+      height: '2px',
+      background: '#1D4ED8', // dark blue underline for active
+      transition: '0.3s'
+    },
+    '&:hover::after': {
+      width: '50%'
+    }
+  });
 
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <Button color="inherit" component={Link} to="/">Home</Button>
+  return (
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{
+        background: '#E6E6FA', // light navbar
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.15)'
+      }}
+    >
+      <Toolbar>
+        {/* LOGO */}
+        <IconButton
+          edge="start"
+          component={Link}
+          to="/"
+          sx={{ mr: 1, color: '#1F2937' }}
+        >
+          <MenuBookIcon sx={{ fontSize: 32 }} />
+        </IconButton>
 
-                    {user && (
-                        <>
-                            <IconButton color="inherit" component={Link} to="/cart">
-                                <Badge badgeContent={0} color="secondary">
-                                    <ShoppingCartIcon />
-                                </Badge>
-                            </IconButton>
+        <Typography
+          variant="h6"
+          sx={{
+            flexGrow: 1,
+            fontWeight: 'bold',
+            letterSpacing: 1.3,
+            color: '#1F2937'
+          }}
+        >
+          Lavender Bookshop
+        </Typography>
 
-                            {user.isAdmin && (
-                                <Button color="inherit" component={Link} to="/admin" sx={{ border: '1px solid rgba(255,255,255,0.5)', borderRadius: 2 }}>
-                                    Admin Dashboard
-                                </Button>
-                            )}
+        {/* NAVIGATION */}
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Button component={Link} to="/" sx={navButtonStyle('/')}>
+            Home
+          </Button>
 
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: 'rgba(255,255,255,0.1)', padding: '5px 15px', borderRadius: 20 }}>
-                                <AccountCircleIcon />
-                                <Typography variant="subtitle2">{user.name}</Typography>
-                            </Box>
+          <Button component={Link} to="/about" sx={navButtonStyle('/about')}>
+            About Us
+          </Button>
 
-                            <IconButton color="inherit" onClick={handleLogout} title="Logout">
-                                <LogoutIcon />
-                            </IconButton>
-                        </>
-                    )}
+          {user && (
+            <>
+              <Button component={Link} to="/orders" sx={navButtonStyle('/orders')}>
+                Order History
+              </Button>
 
-                    {!user && (
-                        <>
-                            <Button color="inherit" component={Link} to="/login">Login</Button>
-                            <Button variant="contained" color="secondary" component={Link} to="/register" sx={{ borderRadius: 20 }}>
-                                Register
-                            </Button>
-                        </>
-                    )}
-                </Box>
-            </Toolbar>
-        </AppBar>
-    );
+              <Button component={Link} to="/profile" sx={navButtonStyle('/profile')}>
+                Profile
+              </Button>
+
+              <IconButton
+                component={Link}
+                to="/cart"
+                sx={{
+                  color: '#1F2937',
+                  '&:hover': { color: '#1D4ED8' }
+                }}
+              >
+                <Badge badgeContent={0} color="secondary">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+
+              {user.isAdmin && (
+                <Button
+                  component={Link}
+                  to="/admin"
+                  sx={{
+                    ml: 1,
+                    px: 2.5,
+                    borderRadius: 3,
+                    fontWeight: 'bold',
+                    color: '#1F2937',
+                    border: '1px solid rgba(0,0,0,0.15)',
+                    '&:hover': {
+                      borderColor: '#1D4ED8',
+                      color: '#1D4ED8'
+                    }
+                  }}
+                >
+                  Admin
+                </Button>
+              )}
+
+              {/* USER INFO */}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 1,
+                  px: 2,
+                  py: 0.7,
+                  ml: 1,
+                  borderRadius: 5,
+                  background: 'rgba(0,0,0,0.05)',
+                  color: '#1F2937'
+                }}
+              >
+                <AccountCircleIcon />
+                <Typography variant="subtitle2">{user.name}</Typography>
+              </Box>
+
+              <IconButton
+                onClick={handleLogout}
+                title="Logout"
+                sx={{
+                  ml: 1,
+                  color: '#1F2937',
+                  '&:hover': { color: '#EF4444' }
+                }}
+              >
+                <LogoutIcon />
+              </IconButton>
+            </>
+          )}
+
+          {!user && (
+            <>
+              <Button
+                component={Link}
+                to="/login"
+                sx={{
+                  color: '#1F2937',
+                  textTransform: 'none'
+                }}
+              >
+                Login
+              </Button>
+
+              <Button
+                component={Link}
+                to="/register"
+                sx={{
+                  ml: 1,
+                  px: 3,
+                  borderRadius: 4,
+                  fontWeight: 'bold',
+                  background: '#374151', // dark gray button
+                  color: '#F9FAFB', // light text
+                  '&:hover': {
+                    background: '#1F2937'
+                  }
+                }}
+              >
+                Register
+              </Button>
+            </>
+          )}
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default Navbar;
