@@ -12,36 +12,59 @@ const generateToken = (id) => {
 
 // Register
 exports.register = bigPromise(async (req, res, next) => {
-    const { name, email, password } = req.body;
+    let { name, email, password, username } = req.body;
 
     if (!name || !email || !password) {
         return next(new CustomError('All fields are required', 400));
     }
 
-    const userExists = await User.findOne({ email });
+    name = String(name).trim();
+    email = String(email).trim().toLowerCase();
 
+    const userExists = await User.findOne({ email });
     if (userExists) {
         return next(new CustomError('User already exists', 400));
+    }
+
+    if (username) {
+        username = String(username).trim();
+        const usernameExists = await User.findOne({ username });
+        if (usernameExists) {
+            return next(new CustomError('Username already exists', 400));
+        }
+    }
+
+    // If username not provided, generate a simple slug from the name and ensure uniqueness
+    if (!username) {
+        const base = name.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 20) || 'user';
+        let candidate = base;
+        let suffix = 0;
+        while (await User.findOne({ username: candidate })) {
+            suffix += 1;
+            candidate = `${base}${Math.floor(Math.random() * 9000) + suffix}`;
+            if (suffix > 10) break;
+        }
+        username = candidate;
     }
 
     const user = await User.create({
         name,
         email,
         password,
+        username,
     });
 
-    if (user) {
-        res.status(201).json({
-            success: true,
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.role === 'admin',
-            token: generateToken(user._id),
-        });
-    } else {
-        return next(new CustomError('Invalid user data', 400));
-    }
+    if (!user) return next(new CustomError('Invalid user data', 400));
+
+    res.status(201).json({
+        success: true,
+        _id: user._id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.role === 'admin',
+        token: generateToken(user._id),
+    });
 });
 
 // Login
