@@ -24,6 +24,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { AuthContext } from '../context/AuthContext';
 import axios from 'axios';
+import API_URL from '../config';
 import { toast } from 'react-toastify';
 
 const BookList = () => {
@@ -37,7 +38,7 @@ const BookList = () => {
     const fetchBooks = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:5002/api/books');
+        const res = await axios.get(`${API_URL}/api/books`);
         if (res.data?.success && Array.isArray(res.data.data)) {
           setBooks(res.data.data);
         } else {
@@ -65,7 +66,7 @@ const BookList = () => {
 
     try {
       await axios.post(
-        'http://localhost:5002/api/cart/addCart',
+        `${API_URL}/api/cart/addCart`,
         { bookId, quantity: 1 },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );

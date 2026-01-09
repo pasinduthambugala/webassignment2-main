@@ -10,6 +10,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import StarIcon from '@mui/icons-material/Star';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import axios from 'axios';
+import API_URL from '../config';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 
@@ -42,7 +43,7 @@ const ChatBot = () => {
 
         try {
             await axios.post(
-                'http://localhost:5002/api/cart/addCart',
+                `${API_URL}/api/cart/addCart`,
                 { bookId, quantity: 1 },
                 { headers: { Authorization: `Bearer ${user.token}` } }
             );
@@ -89,7 +90,7 @@ const ChatBot = () => {
         const handleAddToCart = async () => {
             try {
                 // First, fetch the book by title to get its ID
-                const response = await axios.get(`http://localhost:5002/api/books`);
+                const response = await axios.get(`${API_URL}/api/books`);
                 if (response.data?.success) {
                     const foundBook = response.data.data.find(b =>
                         b.title.toLowerCase() === book.title.toLowerCase()
@@ -214,7 +215,7 @@ const ChatBot = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:5002/api/chat', { message: userMsg.text });
+            const response = await axios.post(`${API_URL}/api/chat`, { message: userMsg.text });
             const botReply = {
                 id: Date.now() + 1,
                 text: response.data.response || response.data.reply || "I received your message!",

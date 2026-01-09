@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Container, Typography, List, ListItem, ListItemText, Button, IconButton, Paper, Divider, Box, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import API_URL from '../config';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import PaymentForm from '../components/PaymentForm';
@@ -15,7 +16,7 @@ const Cart = () => {
 
     const fetchCart = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5002/api/cart', {
+            const { data } = await axios.get(`${API_URL}/api/cart`, {
                 headers: { Authorization: `Bearer ${user.token} ` }
             });
             if (data.success) {
@@ -38,7 +39,7 @@ const Cart = () => {
 
     const removeFromCart = async (id) => {
         try {
-            await axios.delete(`http://localhost:5002/api/cart/removeItem/${id}`, {
+            await axios.delete(`${API_URL}/api/cart/removeItem/${id}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             toast.success("Removed");
@@ -68,7 +69,7 @@ const Cart = () => {
                 };
             });
 
-            await axios.post('http://localhost:5002/api/order',
+            await axios.post(`${API_URL}/api/order`,
                 {
                     items,
                     itemsPrice: totalPrice,

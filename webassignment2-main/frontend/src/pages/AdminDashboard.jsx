@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Container, TextField, Button, Typography, Box, Paper } from '@mui/material';
 import axios from 'axios';
+import API_URL from '../config';
 import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +30,7 @@ const AdminDashboard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5002/api/books', book, {
+            await axios.post(`${API_URL}/api/books`, book, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             toast.success("Book added successfully!");

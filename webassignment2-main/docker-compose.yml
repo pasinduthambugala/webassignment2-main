@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: bookstore-backend
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - MONGODB_URI=mongodb+srv://pasinduthambugala:Software123@cluster0.6u2jqeu.mongodb.net/?appName=Cluster0
+      - JWT_SECRET=your_super_secret_jwt_key_please_change
+      - FRONTEND_URL=http://localhost:5173
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:5002}
+    container_name: bookstore-frontend
+    ports:
+      - "80:80"
+    environment:
+      # React build time env vars need to be present at build.
+      # We pass them via args above.
+      - VITE_API_URL=http://localhost:5002
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
