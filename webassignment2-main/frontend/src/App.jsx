@@ -11,6 +11,10 @@ import Register from './pages/Register';
 import AdminDashboard from './pages/AdminDashboard';
 import Cart from './pages/Cart';
 import { AuthProvider } from './context/AuthContext';
+import AboutUs from './pages/AboutUs';
+import OrderHistory from './pages/OrderHistory';
+import ProfilePage from './pages/ProfilePage';
+
 
 const theme = createTheme({
     palette: {
@@ -68,6 +72,9 @@ function App() {
                             <Route path="/register" element={<Register />} />
                             <Route path="/admin" element={<AdminDashboard />} />
                             <Route path="/cart" element={<Cart />} />
+                            <Route path="/about" element={<AboutUs />} />
+                            <Route path="/orders" element={<OrderHistory />} />
+                            <Route path="/profile" element={<ProfilePage />} />
                         </Routes>
 
                         {/* Global ChatBot Widget */}

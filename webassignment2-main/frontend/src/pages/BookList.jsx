@@ -86,38 +86,65 @@ const BookList = () => {
   );
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        py: 6,
-      }}
-    >
-      <Container maxWidth="xl">
-        {/* Header Section */}
-        <Fade in timeout={800}>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: 800,
-                mb: 2,
-                background: 'linear-gradient(45deg, #fff 30%, #f0f0f0 90%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textShadow: '0 4px 12px rgba(0,0,0,0.2)',
-              }}
-            >
-              📚 Discover Amazing Books
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'rgba(255,255,255,0.9)',
-                mb: 4,
-                fontWeight: 400,
-              }}
-            >
+     <Box
+  sx={{
+    minHeight: '100vh',
+    py: 6,
+    
+    /* Book image background */
+    background: `url('https://images.pexels.com/photos/3646172/pexels-photo-3646172.jpeg') center/cover no-repeat`,
+    
+    /* Optional subtle glossy glass overlay */
+    position: 'relative',
+    overflow: 'hidden',
+
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.78)', // dark overlay for readability
+      pointerEvents: 'none',
+    },
+
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      backdropFilter: 'blur(0px)',
+      WebkitBackdropFilter: 'blur(0px)',
+      pointerEvents: 'none',
+    },
+  }}
+>
+
+     <Container maxWidth="xl">
+  {/* Header Section */}
+  <Fade in timeout={800}>
+    <Box sx={{ textAlign: 'center', mb: 6 }}>
+      <Typography
+        variant="h2"
+        sx={{
+          position: 'relative',
+          fontWeight: 800,
+          color: '#ffffffff',
+          mb: 2,
+          background: 'linear-gradient( #ffffffff 30%, #ffffffff 90%)', 
+          WebkitBackgroundClip: 'text',
+        }}
+      >
+        📚 Discover Amazing Books
+      </Typography>
+      <Typography
+        variant="h6"
+        sx={{
+          position: 'relative',
+          color: 'rgba(255, 255, 255, 1)', // soft cream/golden
+          mb: 4,
+          fontWeight: 400,
+        }}
+      >
+  
+
               Explore our curated collection of {books.length} books
             </Typography>
 
@@ -204,7 +231,7 @@ const BookList = () => {
                     <Box
                       sx={{
                         position: 'relative',
-                        paddingTop: '130%', // Reduced from 140% for better grid layout
+                        paddingTop: '80%', // Reduced from 140% for better grid layout
                         overflow: 'hidden',
                         background: 'linear-gradient(135deg, rgba(102,126,234,0.3) 0%, rgba(118,75,162,0.3) 100%)',
                       }}
